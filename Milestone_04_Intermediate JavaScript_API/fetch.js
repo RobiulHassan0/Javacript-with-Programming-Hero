@@ -1,5 +1,5 @@
 
-const loadData = () => {
+const loadPosts = () => {
     fetch("https://dummyjson.com/carts")
         // promise of 
         .then( (response) => response.json())
@@ -22,6 +22,6 @@ const loadPosts = () => {
 
 const displayPosts = (posts) => {
     posts.forEach( (post) => {
-        console.log(post);
+        console.log(post.discountedTotal);
     });
 };
