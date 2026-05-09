@@ -4,12 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ES6 Practice</title>
+    <style>
+        body{
+            margin: 0 auto;
+        }
+        .heading{
+            text-align: center;
+            font-size: 50px;
+            color: brown;
+        }
+        #user-container{
+            max-width: 1160px;
+            margin: 50px auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .user-card{
+            border: 1px solid #ddd;
+            padding: 20px;
+            background: teal;
+            border-radius: 10px;
+            box-shadow:  1px 1px 1px 1px gray;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <button onclick="loadData()">Load Data</button>
     <button onclick="loadPosts()">Load Data</button>
 
-    <ul id="post-container"></ul>
+
+    <h2 class="heading">All Users</h2>
+    <div id="user-container">
+        
+    </div>
 
     <!-- <script src="fetch.js"></script> -->
     <script src="posts.js"></script>

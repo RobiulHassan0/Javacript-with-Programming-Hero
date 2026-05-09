@@ -1,27 +1,38 @@
 const loadPosts = () => {
-    const url = "https://dummyjson.com/users";
-    fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-            console.log(data);
-            displayPosts(data.users);
-        })
+  const url = "https://dummyjson.com/users";
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      displayPosts(data.users);
+    });
+};
+loadPosts();
+
+const displayPosts = (allUsers) => {
+  // 1. get the container and empty the container
+  const userContainer = document.getElementById("user-container");
+  userContainer.innerHTML = "";
+
+  allUsers.forEach((user) => {
+    // 2. create Element
+    const userCard = document.createElement("div");
+    userCard.innerHTML = `
+        <div class="user-card">
+            <div style="display: flex; gap: 10px;">
+                <h2>Name : ${user.firstName}</h2>
+                <h2>${user.lastName}</h2>
+            </div>
+            <p>Age : ${user.age}</p>
+            <p>Email : ${user.email}</p>
+            <p>Role : ${user.role}</p>
+            <img src="${user.image}" alt="user_image">
+
+        </div>
+        `;
+    // 3.addd to container
+    userContainer.append(userCard);
+  });
+
 };
 
-
-const displayPosts = (usersData) => {
-    // 1. get the container
-    const postContainer = document.getElementById('post-container');
-    // console.log(postContainer);
-
-    usersData.forEach((user) => {
-        console.log(user.address.address);
-
-        // 2. create HTML element
-        const li = document.createElement('li');
-        li.innerText = user.address.address;
-
-        // 3. add li into container
-        postContainer.appendChild(li);
-    });
-}
