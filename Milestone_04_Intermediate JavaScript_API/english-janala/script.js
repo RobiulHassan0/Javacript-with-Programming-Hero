@@ -132,14 +132,26 @@ const displayLessons = (lessons) => {
 
 loadLessons();
 
-document.getElementById("search-btn").addEventListener("click", () => {
-  const searchValue = document.getElementById("search-input").value.trim().toLowerCase();
+let allWords = [];
 
-  fetch("https://openapi.programming-hero.com/api/words/all")
+const loadAllWords = () => {
+    fetch("https://openapi.programming-hero.com/api/words/all")
     .then((res) => res.json())
     .then((data) => {
-      const allWords = data.data;
-      const filterWords = allWords.filter((word) => word.word.toLowerCase().includs(searchValue));
-      console.log(filterWords);
-    });
-});
+      allWords = data.data;
+      console.log("All words loaded and ready for searching!");
+    })
+    .catch( err => console.error("Error loading data: ", err));
+}
+loadAllWords();
+
+document.getElementById("search-btn").addEventListener("click", () => {
+    removeActive();
+  const searchValue = document.getElementById("search-input").value.trim().toLowerCase();
+
+  const filterWords = allWords.filter((word) => word.word.toLowerCase().includes(searchValue));
+
+  console.log(filterWords);
+
+  displayLevelWord(filterWords);
+}); 
