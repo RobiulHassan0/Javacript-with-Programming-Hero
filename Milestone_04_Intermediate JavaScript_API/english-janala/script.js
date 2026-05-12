@@ -10,7 +10,7 @@ function pronounceWord(word) {
     window.speechSynthesis.speak(utterance);
 }
 
-const manageSpinnger = (status) => {
+const manageSpinner  = (status) => {
     if (status === true) {
         document.getElementById("spinner").classList.remove("hidden");
         document.getElementById("word-container").classList.add("hidden");
@@ -32,7 +32,7 @@ const removeActive = () => {
 };
 
 const loadLevelWord = (id) => {
-    manageSpinnger(true);
+    manageSpinner (true);
     const url = `https://openapi.programming-hero.com/api/level/${id}`;
     // console.log(url);
     fetch(url)
@@ -46,7 +46,7 @@ const loadLevelWord = (id) => {
 };
 // loadLevelWord();
 
-const loardWordDetails = async (id) => {
+const loadWordDetails = async (id) => {
     const url = `https://openapi.programming-hero.com/api/word/${id}`;
 
     const res = await fetch(url);
@@ -90,7 +90,7 @@ const displayLevelWord = (words) => {
             <h2 class="font-bold text-4xl font-bangla">নেক্সট Lesson এ যান।</h2>
         </div>
         `;
-        manageSpinnger(false);
+        manageSpinner (false);
         return;
     }
 
@@ -102,7 +102,7 @@ const displayLevelWord = (words) => {
           <p class="font-semibold">${word.meaning ? word.meaning : "অর্থ পাওয়া যায়নি!"}</p>
           <div class="text-2xl font-medium font-bangla">${word.pronunciation ? word.pronunciation : "উচ্চারণ পাওয়া যায়নি!"}</div>
           <div class="flex justify-between items-center">
-            <button onclick="loardWordDetails(${word.id})" class="btn bg-[#1A91FF10] hover:bg-[#1A91FF80]">
+            <button onclick="loadWordDetails(${word.id})" class="btn bg-[#1A91FF10] hover:bg-[#1A91FF80]">
                 <i class="fa-solid fa-circle-info"></i>
             </button>
             <button onclick="pronounceWord('${word.word}')" class="btn hover:bg-[#1A91FF80]">
@@ -113,7 +113,7 @@ const displayLevelWord = (words) => {
         `;
         wordContainer.append(card);
     });
-    manageSpinnger(false);
+    manageSpinner (false);
 };
 
 const displayLessons = (lessons) => {
@@ -157,8 +157,8 @@ const loadAllWords = () => {
 loadAllWords();
 
 document.getElementById("search-btn").addEventListener("click", () => {
-    manageSpinnger(true);
-    
+    manageSpinner (true);
+
     removeActive();
     const searchValue = document.getElementById("search-input").value.trim().toLowerCase();
 
